@@ -1,0 +1,85 @@
+.header {
+  background-color: $color-light-green;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.header__container {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+
+.top-currency {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0;
+}
+
+.header__wallet {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.top-currency__item {
+  padding: 1rem;
+  background-color: $color-dark-green;
+  border-radius: 100px;
+}
+
+.header__wallet-info {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+//1040px
+@media (max-width: 65em) {
+  .top-currency__item {
+    padding: 0.5rem;
+  }
+}
+
+//880px
+@media (max-width: 55em) {
+  .top-currency {
+    margin-left: 2.5rem;
+  }
+}
+
+//752px
+@media (max-width: 47em) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+//544px
+@media (max-width: 34em) {
+  .top-currency__item {
+    padding: 0.2rem;
+    font-size: 14px;
+  }
+
+  .top-currency {
+    padding: 0;
+    margin: 16px 0 16px 0;
+  }
+}
+
+//400px
+@media (max-width: 25em) {
+  .top-currency {
+    flex-direction: column;
+  }
+}
