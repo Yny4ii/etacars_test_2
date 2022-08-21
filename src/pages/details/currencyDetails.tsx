@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCurrencyHistory } from "../../redux/slices/currencySlices";
 import { LineChart } from "../../components/lineChart/lineChart";
-import { Loader } from "../../components/loader/loader";
+import { Loader } from "../../stories/loader/loader";
 import Modal from "../../components/modal/modal";
 import { floatFormat } from "../../helpers/floatFormat";
 import { Currency } from "../../interfaces/Currency";
+import { Button } from "../../stories/button/button";
 
 export const CurrencyDetails = () => {
   const navigate = useNavigate();
@@ -45,13 +46,16 @@ export const CurrencyDetails = () => {
       {status === "success" && history.length ? (
         <div className="currency-details column">
           <div className="row">
-            <div className="add-button" onClick={onClickPlusButton}>
-              +
-            </div>
-            <div
-              className="back-button"
+            <Button
+              variant={"add-button"}
+              onClick={onClickPlusButton}
+              label={"+"}
+            ></Button>
+            <Button
+              variant={"back-button"}
               onClick={onNavigateToCurrencyTable}
-            >{`<-`}</div>
+              label={"<-"}
+            ></Button>
           </div>
 
           <LineChart history={history} />

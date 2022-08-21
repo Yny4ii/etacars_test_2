@@ -1,6 +1,6 @@
 import React from "react";
 
-interface PaginationProps {
+export interface PaginationProps {
   paginate: (pageNumber: number) => void;
   currenciesPerPage: number;
   totalCurrency: number;
@@ -19,7 +19,7 @@ export const Pagination = ({
     <ul className="pagination">
       {pageNumbers.map((e) => (
         <li onClick={() => paginate(e)} key={e} className="page-item">
-          <a href="#" className="page-link">
+          <a href="src/stories/pagination/Pagination#" className="page-link">
             {e}
           </a>
         </li>

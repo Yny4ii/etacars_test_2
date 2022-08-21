@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { CurrencyItem } from "../../components/currencyItem/currencyItem";
 import Modal from "../../components/modal/modal";
 import { useAppSelector, useWindowWidth } from "../../hooks/hooks";
-import { Loader } from "../../components/loader/loader";
-import { Pagination } from "../../components/pagination/Pagination";
+import { Loader } from "../../stories/loader/loader";
+import { Pagination } from "../../stories/pagination/Pagination";
 import { Currency } from "../../interfaces/Currency";
 import { floatFormat } from "../../helpers/floatFormat";
 

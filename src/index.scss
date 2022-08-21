@@ -34,16 +34,16 @@ ul, ol, li {
 
 @import './styles/typography';
 @import './styles/colors';
-@import './styles/add-button';
+@import 'stories/button/add-button';
 @import 'styles/row';
 @import 'styles/column';
-@import 'styles/delete-button';
-@import 'styles/back-button';
+@import 'stories/button/delete-button';
+@import 'stories/button/back-button';
 @import 'components/header/header';
 @import 'pages/main/currensyTable';
 @import 'components/modal/modal';
 @import 'components/walletModal/walletModal';
-@import 'components/loader/loader';
-@import 'components/pagination/pagination';
+@import 'stories/loader/loader';
+@import 'stories/pagination/pagination';
 @import 'pages/details/currency-details';
 

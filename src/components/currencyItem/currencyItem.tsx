@@ -3,6 +3,7 @@ import { floatFormat } from "../../helpers/floatFormat";
 import { useNavigate } from "react-router-dom";
 import { Currency } from "../../interfaces/Currency";
 import { useWindowWidth } from "../../hooks/hooks";
+import { Button } from "../../stories/button/button";
 
 interface CurrencyItemProps {
   id: string;
@@ -81,9 +82,11 @@ export const CurrencyItem = ({
       ) : null}
 
       <td className="table__item">
-        <div className="add-button" onClick={onClickPlusButton}>
-          +
-        </div>
+        <Button
+          variant={"add-button"}
+          onClick={onClickPlusButton}
+          label={"+"}
+        />
       </td>
     </tr>
   );

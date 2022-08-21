@@ -3,6 +3,7 @@ import { Wallet } from "../../interfaces/Wallet";
 import { floatFormat } from "../../helpers/floatFormat";
 import { useAppDispatch } from "../../hooks/hooks";
 import { deleteCurrencyFromWallet } from "../../redux/slices/walletSlice";
+import { Button } from "../../stories/button/button";
 
 interface WalletModalProps {
   setActive: (option: boolean) => void;
@@ -24,12 +25,11 @@ export const WalletModal = ({
               <div>{e.name}</div>
               <div>${floatFormat(e.price)}</div>
               <div>{e.count}</div>
-              <div
-                className="delete-button"
+              <Button
+                variant={"delete-button"}
                 onClick={() => dispatch(deleteCurrencyFromWallet(e.id))}
-              >
-                Delete
-              </div>
+                label={"delete"}
+              />
             </li>
           ))}
         </ul>
