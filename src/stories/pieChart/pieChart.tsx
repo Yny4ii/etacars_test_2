@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {SVGProps, useEffect, useRef, useState} from "react";
 // @ts-ignore
 import * as d3 from "d3";
 import { Wallet } from "../../interfaces/Wallet";
@@ -13,7 +13,7 @@ export const PieChart = ({ walletCurrency }: PieChartProps) => {
       return { property: e.name, value: e.count * e.price };
     })
   );
-  const svgRef = useRef();
+  const svgRef = useRef(null);
   useEffect(() => {
     const w = 100;
     const h = 100;
@@ -40,7 +40,7 @@ export const PieChart = ({ walletCurrency }: PieChartProps) => {
 
   return (
     <div className="pie-chart">
-      <svg className="pie-chart-svg" ref={svgRef}></svg>
+     <svg className="pie-chart-svg" ref={svgRef}></svg>
     </div>
   );
 };
