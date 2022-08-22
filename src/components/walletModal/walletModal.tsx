@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Wallet } from "../../interfaces/Wallet";
 import { floatFormat } from "../../helpers/floatFormat";
 import { useAppDispatch } from "../../hooks/hooks";
 import { deleteCurrencyFromWallet } from "../../redux/slices/walletSlice";
 import { Button } from "../../stories/button/button";
+import { PieChart } from "../../stories/pieChart/pieChart";
 
 interface WalletModalProps {
   setActive: (option: boolean) => void;
@@ -15,6 +16,7 @@ export const WalletModal = ({
   walletCurrency,
 }: WalletModalProps) => {
   const dispatch = useAppDispatch();
+
   return (
     <div className="modal" onClick={() => setActive(false)}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
@@ -33,6 +35,7 @@ export const WalletModal = ({
             </li>
           ))}
         </ul>
+        {walletCurrency.length && <PieChart walletCurrency={walletCurrency} />}
       </div>
     </div>
   );
