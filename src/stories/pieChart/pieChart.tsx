@@ -26,25 +26,16 @@ export const PieChart = ({ walletCurrency }: PieChartProps) => {
       .style("overflow", "visible")
       .style("margin-top", "50px");
 
+    // @ts-ignore
     const formattedData = d3.pie().value((d) => d.value)(data);
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(radius);
     const color = d3.scaleOrdinal().range(d3.schemeSet2);
 
-    svg
-      .selectAll()
-      .data(formattedData)
-      .join("path")
-      .attr("d", arcGenerator)
-      .attr("fill", (d) => color(d.value))
-      .style("opacity", 0.7);
+    // @ts-ignore
+    svg.selectAll().data(formattedData).join("path").attr("d", arcGenerator).attr("fill", (d) => color(d.value)).style("opacity", 0.7);
 
-    svg
-      .selectAll()
-      .data(formattedData)
-      .join("text")
-      .text((d) => d.data.property)
-      .attr("transform", (d) => `translate(${arcGenerator.centroid(d)})`)
-      .style("text-anchor", "middle");
+    // @ts-ignore
+    svg.selectAll().data(formattedData).join("text").text((d) => d.data.property).attr("transform", (d) => `translate(${arcGenerator.centroid(d)})`).style("text-anchor", "middle");
   }, [data]);
 
   return (
