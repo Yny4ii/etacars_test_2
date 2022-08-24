@@ -3,6 +3,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Currency } from "../../interfaces/Currency";
 import { History } from "../../interfaces/History";
+import { useQuery } from "@apollo/client";
+import { GET_CURRENCIES } from "../../graphql/queries/getCurrencies";
+import { client } from "../../graphql/client";
+import { GET_CURRENCY_HISTORY } from "../../graphql/queries/getCurrencyHistory";
 
 const api = "https://api.coincap.io/v2/assets";
 
@@ -21,17 +25,19 @@ const initialState: InitialState = {
 export const getCurrencies = createAsyncThunk(
   "/currency/getCurrencies",
   async () => {
-    const response = await axios.get(api);
-    return await response.data.data;
+    const response = await client.query({ query: GET_CURRENCIES });
+    const data = response.data;
+    console.log(data);
+    return data.getCurrencies;
   }
 );
 
 export const getCurrencyHistory = createAsyncThunk(
   "/currency/getCurrencyHistory",
-  async (id: string | undefined) => {
-    const response = await axios.get(`${api}/${id}/history?interval=d1`);
-    console.log(response.data.data);
-    return await response.data.data;
+  async (id: string) => {
+    const response = await client.query({ query: GET_CURRENCY_HISTORY(id) });
+    const data = await response.data;
+    return data.getCurrencyHistory;
   }
 );
 
@@ -47,7 +53,8 @@ const currencySlice = createSlice({
         state.currencies = action.payload;
       }
     );
-    builder.addCase(getCurrencies.rejected, (state) => {
+    builder.addCase(getCurrencies.rejected, (state, action) => {
+      console.log(action.error.message);
       state.status = "error";
       state.currencies = [];
     });

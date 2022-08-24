@@ -23,7 +23,7 @@ export const CurrencyDetails = () => {
   const { id } = useParams();
   const currency = currencies.find((e) => e.id === id);
   useEffect(() => {
-    if (currency !== null) {
+    if (currency && id) {
       dispatch(getCurrencyHistory(id));
     }
   }, [id, dispatch]);
