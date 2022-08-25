@@ -1,14 +1,9 @@
-import axios from "axios";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Currency } from "../../interfaces/Currency";
 import { History } from "../../interfaces/History";
-import { useQuery } from "@apollo/client";
 import { GET_CURRENCIES } from "../../graphql/queries/getCurrencies";
 import { client } from "../../graphql/client";
 import { GET_CURRENCY_HISTORY } from "../../graphql/queries/getCurrencyHistory";
-
-const api = "https://api.coincap.io/v2/assets";
 
 interface InitialState {
   status: string;
