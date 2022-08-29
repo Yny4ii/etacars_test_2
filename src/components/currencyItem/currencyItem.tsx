@@ -59,7 +59,6 @@ export const CurrencyItem = ({
     };
     setSelectedCurrency(currency);
   };
-
   return (
     <tr className="table__row" onClick={() => onNavigateToCurrencyDetails(id)}>
       <td className="table__item">{rank}</td>
@@ -76,7 +75,9 @@ export const CurrencyItem = ({
       {width > 560 ? (
         <td className="table__item">{floatFormat(supply)}</td>
       ) : null}
-      {width > 890 ? <th className="table__item">Volume (24Hr)</th> : null}
+      {width > 890 ? (
+        <td className="table__item">{floatFormat(volumeUsd24Hr)}</td>
+      ) : null}
       {width > 400 ? (
         <td className="table__item">{floatFormat(changePercent24Hr)}%</td>
       ) : null}
