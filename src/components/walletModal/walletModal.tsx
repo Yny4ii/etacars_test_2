@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Wallet } from "../../interfaces/Wallet";
 import { floatFormat } from "../../helpers/floatFormat";
 import { useAppDispatch } from "../../hooks/hooks";
@@ -16,7 +16,6 @@ export const WalletModal = ({
   walletCurrency,
 }: WalletModalProps) => {
   const dispatch = useAppDispatch();
-
   return (
     <div className="modal" onClick={() => setActive(false)}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
