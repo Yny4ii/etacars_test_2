@@ -35,6 +35,11 @@ export const LineChart = ({ history }: LineChartProps) => {
     return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
   });
 
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
   const data = {
     labels: month,
     datasets: [
@@ -43,12 +48,16 @@ export const LineChart = ({ history }: LineChartProps) => {
         data: history.map((e) => e.priceUsd),
         fill: true,
         pointBorderColor: "#8884d8",
-        pointBorderWidth: 2,
-        pointRadius: 1,
+        pointBorderWidth: 1,
+        pointRadius: 0.75,
         tension: 1,
       },
     ],
   };
 
-  return <Line data={data} style={{ maxHeight: "300px" }} />;
+  return (
+    <div style={{ width: "100%", height: "300px" }}>
+      <Line data={data} options={options} />
+    </div>
+  );
 };
