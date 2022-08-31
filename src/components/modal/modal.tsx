@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import { Currency } from "../../interfaces/Currency";
 import { useAppDispatch } from "../../hooks/hooks";
 import { addCurrencyToWallet } from "../../redux/slices/walletSlice";
+import { checkInput } from "../../helpers/checkInput";
 
 interface ModalProps {
   setActive: (option: boolean) => void;
@@ -18,7 +19,12 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
   };
 
   const onAddButton = () => {
-    if (reg.test(input) && selectedCurrency && input!=='0') {
+    if (
+      reg.test(input) &&
+      selectedCurrency &&
+      input !== "0" &&
+      checkInput(input)
+    ) {
       setActive(false);
       dispatch(
         addCurrencyToWallet({
@@ -50,7 +56,10 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
           </button>
         </div>
         {warningActive && (
-          <div className="modal__warning-message">Invalid value</div>
+          <div className="modal__warning-message">
+            Invalid value <br />
+            (min - 0.00001, max - 100000000)
+          </div>
         )}
       </div>
     </div>
