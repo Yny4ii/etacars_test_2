@@ -1,3 +1,5 @@
+import "@percy/cypress";
+
 describe("Details page tests", () => {
   it("page should change to a page with details", () => {
     cy.visit("http://localhost:3000");
@@ -10,6 +12,7 @@ describe("Details page tests", () => {
       expect(loc.protocol).to.eq("http:");
       expect(loc.href).to.eq("http://localhost:3000/currency/bitcoin");
     });
+    cy.percySnapshot();
   });
 
   it("page should have a currency chart", () => {
@@ -18,6 +21,7 @@ describe("Details page tests", () => {
     cy.get(".modal").should("be.visible");
     cy.get(".modal__input").type("1").should("have.value", "1");
     cy.get(".modal__input-field > .add-button").click();
+    cy.percySnapshot();
   });
 
   it("back-button should return from main page", () => {
@@ -25,5 +29,6 @@ describe("Details page tests", () => {
     cy.location().should((loc) => {
       expect(loc.href).to.eq("http://localhost:3000/");
     });
+    cy.percySnapshot();
   });
 });

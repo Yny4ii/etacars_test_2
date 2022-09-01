@@ -1,3 +1,5 @@
+import "@percy/cypress";
+
 describe("Wallet  tests", () => {
   it("wallet should save currency after reload", () => {
     cy.visit("http://localhost:3000");
@@ -10,6 +12,7 @@ describe("Wallet  tests", () => {
     cy.reload();
     cy.get(".header__wallet").click();
     cy.contains("1.23");
+    cy.percySnapshot();
   });
 
   it("check delete-button", () => {
@@ -23,5 +26,6 @@ describe("Wallet  tests", () => {
     cy.get(".delete-button").click();
     cy.reload();
     cy.get(".header__wallet").contains("$0.000");
+    cy.percySnapshot();
   });
 });

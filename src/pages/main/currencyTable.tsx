@@ -5,7 +5,6 @@ import { useAppSelector, useWindowWidth } from "../../hooks/hooks";
 import { Loader } from "../../stories/loader/loader";
 import { Pagination } from "../../stories/pagination/Pagination";
 import { Currency } from "../../interfaces/Currency";
-import { floatFormat } from "../../helpers/floatFormat";
 
 export const CurrencyTable = () => {
   const { currencies, status } = useAppSelector(
