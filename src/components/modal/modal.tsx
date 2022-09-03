@@ -18,7 +18,8 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
     setInput(e.target.value);
   };
 
-  const onAddButton = () => {
+  const onAddButton = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (
       reg.test(input) &&
       selectedCurrency &&
@@ -44,16 +45,18 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <p>Enter the value and click add</p>
         <div className="modal__input-field">
-          <input
-            onChange={(e) => onChangeInput(e)}
-            value={input}
-            autoFocus={true}
-            className="modal__input"
-            placeholder="Enter the value..."
-          />
-          <button className="add-button" onClick={onAddButton}>
-            Add
-          </button>
+          <form>
+            <input
+              onChange={(e) => onChangeInput(e)}
+              value={input}
+              autoFocus={true}
+              className="modal__input"
+              placeholder="Enter the value..."
+            />
+            <button className="add-button" onClick={(e) => onAddButton(e)}>
+              Add
+            </button>
+          </form>
         </div>
         {warningActive && (
           <div className="modal__warning-message">
