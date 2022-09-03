@@ -8,6 +8,15 @@
 
 .table__row {
   margin-bottom: 1rem;
+  transition: all 0.5s ease;
+
+
+}
+tbody>.table__row{
+  cursor: pointer;
+  &:hover{
+    background-color: rgba($color-light-green, 0.2);
+  }
 }
 
 .table__item {
