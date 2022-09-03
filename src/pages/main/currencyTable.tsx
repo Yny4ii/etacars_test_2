@@ -75,6 +75,7 @@ export const CurrencyTable = () => {
             paginate={paginate}
             currenciesPerPage={currenciesPerPage}
             totalCurrency={currencies.length}
+            currentPage={currentPage}
           />
         </div>
       ) : null}
