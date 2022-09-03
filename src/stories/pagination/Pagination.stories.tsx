@@ -8,10 +8,8 @@ export default {
 };
 
 const Template: Story<PaginationProps> = (args: PaginationProps) => {
-  const [currency, setCurrency] = useState<number>(100);
-
-  const [currenciesPerPage] = useState<number>(10);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const limit = 10;
+  const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -20,9 +18,9 @@ const Template: Story<PaginationProps> = (args: PaginationProps) => {
   return (
     <Pagination
       {...args}
-      paginate={paginate}
-      currenciesPerPage={currenciesPerPage}
-      totalCurrency={currency}
+      limit={limit}
+      currentPage={currentPage}
+      pagination={paginate}
     />
   );
 };

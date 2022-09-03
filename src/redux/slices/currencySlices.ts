@@ -9,20 +9,25 @@ interface InitialState {
   status: string;
   currencies: Currency[];
   history: History[];
+  offset: number;
+  limit: number;
+  currentPage: number;
 }
 
 const initialState: InitialState = {
   currencies: [],
   history: [],
   status: "loading",
+  offset: 0,
+  limit: 10,
+  currentPage: 1,
 };
 
 export const getCurrencies = createAsyncThunk(
   "/currency/getCurrencies",
-  async () => {
-    const response = await client.query({ query: GET_CURRENCIES });
+  async (offset: number) => {
+    const response = await client.query({ query: GET_CURRENCIES(10, offset) });
     const data = response.data;
-    console.log(data);
     return data.getCurrencies;
   }
 );
@@ -39,7 +44,12 @@ export const getCurrencyHistory = createAsyncThunk(
 const currencySlice = createSlice({
   name: "currency",
   initialState,
-  reducers: {},
+  reducers: {
+    paginate(state, action) {
+      state.offset = (action.payload - 1) * state.limit;
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getCurrencies.fulfilled,
@@ -74,5 +84,5 @@ const currencySlice = createSlice({
     });
   },
 });
-
+export const { paginate } = currencySlice.actions;
 export const currencyReducer = currencySlice.reducer;

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const GET_CURRENCIES = gql`
+export const GET_CURRENCIES = (limit: number, offset: number) => gql`
   query {
-    getCurrencies {
+    getCurrencies (limit:${limit}, offset:${offset}) {
       id
       rank
       symbol
