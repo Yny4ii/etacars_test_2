@@ -2,7 +2,6 @@ import React from "react";
 import { floatFormat } from "../../helpers/floatFormat";
 import { useNavigate } from "react-router-dom";
 import { Currency } from "../../interfaces/Currency";
-import { useWindowWidth } from "../../hooks/hooks";
 import { Button } from "../../stories/button/button";
 
 interface CurrencyItemProps {
@@ -40,7 +39,6 @@ export const CurrencyItem = ({
   const onNavigateToCurrencyDetails = (id: string) => {
     navigate(`/currency/${id}`);
   };
-  const width = useWindowWidth();
   const onClickPlusButton = (e: React.MouseEvent) => {
     e.stopPropagation();
     setActive(true);
@@ -64,24 +62,11 @@ export const CurrencyItem = ({
       <td className="table__item">{rank}</td>
       <td className="table__item">{name}</td>
       <td className="table__item">${floatFormat(priceUsd)}</td>
-
-      {width > 780 ? (
-        <td className="table__item">${floatFormat(marketCapUsd)}</td>
-      ) : null}
-
-      {width > 660 ? (
-        <td className="table__item">${floatFormat(vwap24Hr)}</td>
-      ) : null}
-      {width > 560 ? (
-        <td className="table__item">{floatFormat(supply)}</td>
-      ) : null}
-      {width > 890 ? (
-        <td className="table__item">{floatFormat(volumeUsd24Hr)}</td>
-      ) : null}
-      {width > 400 ? (
-        <td className="table__item">{floatFormat(changePercent24Hr)}%</td>
-      ) : null}
-
+      <td className="table__item">${floatFormat(marketCapUsd)}</td>
+      <td className="table__item">${floatFormat(vwap24Hr)}</td>
+      <td className="table__item">{floatFormat(supply)}</td>
+      <td className="table__item">{floatFormat(volumeUsd24Hr)}</td>
+      <td className="table__item">{floatFormat(changePercent24Hr)}%</td>
       <td className="table__item">
         <Button
           variant={"add-button"}

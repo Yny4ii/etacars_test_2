@@ -12,9 +12,11 @@
 
 
 }
-tbody>.table__row{
+
+tbody > .table__row {
   cursor: pointer;
-  &:hover{
+
+  &:hover {
     background-color: rgba($color-light-green, 0.2);
   }
 }
@@ -28,4 +30,51 @@ tbody>.table__row{
   border-collapse: collapse;
   width: 100%;
 }
+
+@media (max-width: 56em) {
+  thead > .table__row > .table__item:nth-child(7) {
+    display: none;
+  }
+  tbody > .table__row > .table__item:nth-child(7) {
+    display: none;
+  }
+}
+
+@media (max-width: 49em) {
+  thead > .table__row > .table__item:nth-child(4) {
+    display: none;
+  }
+  tbody > .table__row > .table__item:nth-child(4) {
+    display: none;
+  }
+}
+
+
+@media (max-width: 42em) {
+  thead > .table__row > .table__item:nth-child(5) {
+    display: none;
+  }
+  tbody > .table__row > .table__item:nth-child(5) {
+    display: none;
+  }
+}
+
+@media (max-width: 35em) {
+  thead > .table__row > .table__item:nth-child(6) {
+    display: none;
+  }
+  tbody > .table__row > .table__item:nth-child(6) {
+    display: none;
+  }
+}
+
+@media (max-width: 25em) {
+  thead > .table__row > .table__item:nth-child(8) {
+    display: none;
+  }
+  tbody > .table__row > .table__item:nth-child(8) {
+    display: none;
+  }
+}
+
 
