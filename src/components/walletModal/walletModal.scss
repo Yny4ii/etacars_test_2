@@ -1,13 +1,12 @@
 .wallet-list {
   padding: 0;
 
-}
-
-.wallet-list__item {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  align-items: center;
+  &__item {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
 }

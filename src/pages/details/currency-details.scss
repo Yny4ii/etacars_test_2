@@ -1,8 +1,8 @@
 .currency-details {
   width: 70%;
   padding: 1rem;
+  &__info-element {
+    padding: 1rem;
+  }
 }
 
-.currency-details__info-element {
-  padding: 1rem;
-}
