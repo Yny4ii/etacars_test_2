@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { getCurrencyHistory } from "../../redux/slices/currencySlices";
 import { LineChart } from "../../components/lineChart/lineChart";
 import { Loader } from "../../stories/loader/loader";
 import Modal from "../../components/modal/modal";
 import { floatFormat } from "../../helpers/floatFormat";
-import { Currency } from "../../interfaces/Currency";
 import { Button } from "../../stories/button/button";
+import { useQuery } from "@apollo/client";
+import { GET_CURRENCY_AND_HISTORY } from "../../graphql/queries/getCurrencyAndHistory";
+import { client } from "../../graphql/client";
+import { Currency } from "../../interfaces/Currency";
 
 export const CurrencyDetails = () => {
   const navigate = useNavigate();
@@ -15,18 +16,15 @@ export const CurrencyDetails = () => {
   const [selectedCurrency, setSelectedCurrency] = useState<Currency | null>(
     null
   );
-
-  const { status, currencies, history } = useAppSelector(
-    (state) => state.currencyReducer
-  );
-  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const currency = currencies.find((e) => e.id === id);
-  useEffect(() => {
-    if (currency && id) {
-      dispatch(getCurrencyHistory(id));
-    }
-  }, [id, dispatch]);
+
+  const { loading, error, data } = useQuery(GET_CURRENCY_AND_HISTORY, {
+    client,
+    variables: {
+      id: id,
+    },
+  });
+
 
   const onNavigateToCurrencyTable = () => {
     navigate(`/`);
@@ -35,53 +33,48 @@ export const CurrencyDetails = () => {
   const onClickPlusButton = (e: React.MouseEvent) => {
     e.stopPropagation();
     setSelectedCurrency(selectedCurrency);
-
     setModalActive(true);
   };
 
+  if (loading) return <Loader />;
+  if (error) return <h1>Error</h1>;
+
+  console.log(data);
   return (
     <>
-      {status === "loading" && <Loader />}
-      {status === "error" && <h1>Error!</h1>}
-      {status === "success" && history.length ? (
-        <div className="currency-details column">
-          <div className="row">
-            <Button
-              variant={"add-button"}
-              onClick={onClickPlusButton}
-              label={"+"}
-            ></Button>
-            <Button
-              variant={"back-button"}
-              onClick={onNavigateToCurrencyTable}
-              label={"<-"}
-            ></Button>
-          </div>
+      <div className="currency-details column">
+        <div className="row">
+          <Button
+            variant={"add-button"}
+            onClick={onClickPlusButton}
+            label={"+"}
+          ></Button>
+          <Button
+            variant={"back-button"}
+            onClick={onNavigateToCurrencyTable}
+            label={"<-"}
+          ></Button>
+        </div>
 
-          <LineChart history={history} />
-          <div className="currency-details__info">
-            <div className="currency-details__info-element">
-              Name: {currency?.name}
-            </div>
-            <div className="currency-details__info-element">
-              Symbol: {currency?.symbol}
-            </div>
-            <div className="currency-details__info-element">
-              Price:{" "}
-              {currency?.priceUsd ? floatFormat(currency.priceUsd) : "None"}
-            </div>
-            <div className="currency-details__info-element">
-              Changed:{" "}
-              {currency?.changePercent24Hr
-                ? `${floatFormat(currency.changePercent24Hr)}%`
-                : "None"}
-            </div>
+        <LineChart history={data.getCurrencyHistory} />
+        <div className="currency-details__info">
+          <div className="currency-details__info-element">
+            Name: {data.getCurrency.name}
+          </div>
+          <div className="currency-details__info-element">
+            Symbol: {data.getCurrency.symbol}
+          </div>
+          <div className="currency-details__info-element">
+            Price:
+            {floatFormat(data.getCurrency.priceUsd)}$
+          </div>
+          <div className="currency-details__info-element">
+            Changed:{floatFormat(data.getCurrency.changePercent24Hr)}%
           </div>
         </div>
-      ) : null}
-
-      {modalActive && currency && (
-        <Modal selectedCurrency={currency} setActive={setModalActive} />
+      </div>
+      {modalActive && data.getCurrency && (
+        <Modal selectedCurrency={data.getCurrency} setActive={setModalActive} />
       )}
     </>
   );

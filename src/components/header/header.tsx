@@ -3,28 +3,36 @@ import { floatFormat } from "../../helpers/floatFormat";
 import { useAppSelector } from "../../hooks/hooks";
 import { calcCurrentWallet, calcInitialWallet } from "../../helpers/calcWallet";
 import { WalletModal } from "../walletModal/walletModal";
+import { useQuery } from "@apollo/client";
+import { GET_CURRENCIES } from "../../graphql/queries/getCurrencies";
+import { client } from "../../graphql/client";
+import { Currency } from "../../interfaces/Currency";
 
 export const Header = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const { currencies: walletCurrency } = useAppSelector(
     (state) => state.walletReducer
   );
-  const currencies = useAppSelector(
-    (state) => state.currencyReducer.currencies
-  );
-  const topCurrencies = currencies.slice(0, 3);
+  const { loading, error, data } = useQuery(GET_CURRENCIES, {
+    client,
+    variables: {
+      limit: 3,
+      offset: 0,
+    },
+  });
+  if (loading) return null;
+  const topCurrencies = data.getCurrencies.slice(0, 3);
 
-  const currentPrice = calcCurrentWallet(walletCurrency, currencies);
+  const currentPrice = calcCurrentWallet(walletCurrency, data.getCurrencies);
   const initialPrice = calcInitialWallet(walletCurrency);
   const walletDifference = currentPrice - initialPrice;
   const walletDifferencePercent = initialPrice
     ? (walletDifference / initialPrice) * 100
     : 0;
-
   return (
     <header className="header">
       <ul className="top-currency">
-        {topCurrencies.map((e) => (
+        {topCurrencies.map((e: Currency) => (
           <li className="top-currency__item" key={e.id}>
             {e.name} - ${floatFormat(e.priceUsd)}
           </li>
