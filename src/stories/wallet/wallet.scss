@@ -1,0 +1,12 @@
+.wallet {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+}

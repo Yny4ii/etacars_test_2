@@ -11,7 +11,6 @@ const initialState: InitialState = {
   limit: 10,
   currentPage: 1,
 };
-
 const currencySlice = createSlice({
   name: "currency",
   initialState,

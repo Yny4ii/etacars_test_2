@@ -1,6 +1,5 @@
 import React from "react";
 import { floatFormat } from "../../helpers/floatFormat";
-import { useNavigate } from "react-router-dom";
 import { Currency } from "../../interfaces/Currency";
 import { Button } from "../../stories/button/button";
 
@@ -18,6 +17,9 @@ interface CurrencyItemProps {
   vwap24Hr: string;
   setActive: (option: boolean) => void;
   setSelectedCurrency: (option: Currency) => void;
+  onNavigate?: (
+    id: string
+  ) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export const CurrencyItem = ({
@@ -34,11 +36,8 @@ export const CurrencyItem = ({
   vwap24Hr,
   setActive,
   setSelectedCurrency,
+  onNavigate,
 }: CurrencyItemProps) => {
-  const navigate = useNavigate();
-  const onNavigateToCurrencyDetails = (id: string) => {
-    navigate(`/currency/${id}`);
-  };
   const onClickPlusButton = (e: React.MouseEvent) => {
     e.stopPropagation();
     setActive(true);
@@ -57,8 +56,9 @@ export const CurrencyItem = ({
     };
     setSelectedCurrency(currency);
   };
+
   return (
-    <tr className="table__row" onClick={() => onNavigateToCurrencyDetails(id)}>
+    <tr className="table__row" onClick={onNavigate && onNavigate(id)}>
       <td className="table__item">{rank}</td>
       <td className="table__item">{name}</td>
       <td className="table__item">${floatFormat(priceUsd)}</td>

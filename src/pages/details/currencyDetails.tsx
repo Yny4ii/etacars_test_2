@@ -37,9 +37,11 @@ export const CurrencyDetails = () => {
   };
 
   if (loading) return <Loader />;
-  if (error) return <h1>Error</h1>;
+  if (error) {
+    console.log(error)
+    return <h1>Error</h1>;
+  }
 
-  console.log(data);
   return (
     <>
       <div className="currency-details column">
@@ -57,7 +59,6 @@ export const CurrencyDetails = () => {
         </div>
 
         <LineChart history={data.getCurrencyHistory} />
-        <div className="currency-details__info">
           <div className="currency-details__info-element">
             Name: {data.getCurrency.name}
           </div>
@@ -72,7 +73,6 @@ export const CurrencyDetails = () => {
             Changed:{floatFormat(data.getCurrency.changePercent24Hr)}%
           </div>
         </div>
-      </div>
       {modalActive && data.getCurrency && (
         <Modal selectedCurrency={data.getCurrency} setActive={setModalActive} />
       )}

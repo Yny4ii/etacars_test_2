@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { floatFormat } from "../../helpers/floatFormat";
 import { useAppSelector } from "../../hooks/hooks";
 import { calcCurrentWallet, calcInitialWallet } from "../../helpers/calcWallet";
 import { WalletModal } from "../walletModal/walletModal";
 import { useQuery } from "@apollo/client";
 import { GET_CURRENCIES } from "../../graphql/queries/getCurrencies";
 import { client } from "../../graphql/client";
-import { Currency } from "../../interfaces/Currency";
+import { TopCurrency } from "../../stories/list/topCurrency";
+import { Wallet } from "../../stories/wallet/wallet";
 
 export const Header = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
@@ -21,39 +21,35 @@ export const Header = () => {
     },
   });
   if (loading) return null;
-  const topCurrencies = data.getCurrencies.slice(0, 3);
+  if (error) {
+    console.log(error)
+    return <h1>Error!</h1>;
+  }
+  else {
+    const topCurrencies = data.getCurrencies.slice(0, 3);
 
-  const currentPrice = calcCurrentWallet(walletCurrency, data.getCurrencies);
-  const initialPrice = calcInitialWallet(walletCurrency);
-  const walletDifference = currentPrice - initialPrice;
-  const walletDifferencePercent = initialPrice
-    ? (walletDifference / initialPrice) * 100
-    : 0;
-  return (
-    <header className="header">
-      <ul className="top-currency">
-        {topCurrencies.map((e: Currency) => (
-          <li className="top-currency__item" key={e.id}>
-            {e.name} - ${floatFormat(e.priceUsd)}
-          </li>
-        ))}
-      </ul>
-      <div className="header__wallet" onClick={() => setModalActive(true)}>
-        <div className="header__wallet-info">
-          <div>${floatFormat(currentPrice)}</div>
-          <div>
-            {walletDifference > 0 ? "+" : ""}
-            {floatFormat(walletDifference)}$
-          </div>
-          <div>{floatFormat(walletDifferencePercent)}%</div>
-        </div>
-      </div>
-      {modalActive && (
-        <WalletModal
-          walletCurrency={walletCurrency}
-          setActive={setModalActive}
+    const currentPrice = calcCurrentWallet(walletCurrency, data.getCurrencies);
+    const initialPrice = calcInitialWallet(walletCurrency);
+    const walletDifference = currentPrice - initialPrice;
+    const walletDifferencePercent = initialPrice
+      ? (walletDifference / initialPrice) * 100
+      : 0;
+    return (
+      <header className="header">
+        <TopCurrency topCurrencies={topCurrencies} />
+        <Wallet
+          setModalActive={setModalActive}
+          currentPrice={currentPrice}
+          walletDifference={walletDifference}
+          walletDifferencePercent={walletDifferencePercent}
         />
-      )}
-    </header>
-  );
+        {modalActive && (
+          <WalletModal
+            walletCurrency={walletCurrency}
+            setActive={setModalActive}
+          />
+        )}
+      </header>
+    );
+  }
 };

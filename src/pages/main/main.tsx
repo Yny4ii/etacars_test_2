@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CurrencyItem } from "../../components/currencyItem/currencyItem";
 import Modal from "../../components/modal/modal";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { Loader } from "../../stories/loader/loader";
@@ -9,8 +8,10 @@ import { paginate } from "../../redux/slices/currencySlices";
 import { useQuery } from "@apollo/client";
 import { GET_CURRENCIES } from "../../graphql/queries/getCurrencies";
 import { client } from "../../graphql/client";
+import { CurrencyTable } from "../../stories/table/currencyTable";
+import { useNavigate } from "react-router-dom";
 
-export const CurrencyTable = () => {
+export const Main = () => {
   const dispatch = useAppDispatch();
 
   const { limit, offset, currentPage } = useAppSelector(
@@ -31,36 +32,26 @@ export const CurrencyTable = () => {
       offset: offset,
     },
   });
+  const navigate = useNavigate();
+  const onNavigateToCurrencyDetails =
+    (id: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      navigate(`/currency/${id}`);
+    };
 
   if (loading) return <Loader />;
-  if (error) return <h1>Error</h1>;
+  if (error) {
+    console.log(error);
+    return <h1>Error</h1>;
+  }
   return (
     <>
       <div className="container column">
-        <table className="table">
-          <thead>
-            <tr className="table__row">
-              <th className="table__item">#</th>
-              <th className="table__item">Coin</th>
-              <th className="table__item">Price</th>
-              <th className="table__item">Market cap</th>
-              <th className="table__item">VWAP (24Hr)</th>
-              <th className="table__item">Supply</th>
-              <th className="table__item">Volume (24Hr)</th>
-              <th className="table__item">Change (24Hr)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.getCurrencies.map((currency:Currency) => (
-              <CurrencyItem
-                setSelectedCurrency={setSelectedCurrency}
-                setActive={setModalActive}
-                key={currency.id}
-                {...currency}
-              />
-            ))}
-          </tbody>
-        </table>
+        <CurrencyTable
+          currencies={data.getCurrencies}
+          setModalActive={setModalActive}
+          setSelectedCurrency={setSelectedCurrency}
+          onNavigate={onNavigateToCurrencyDetails}
+        />
         <Pagination
           limit={limit}
           currentPage={currentPage}

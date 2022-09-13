@@ -1,0 +1,44 @@
+
+.top-currency {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0;
+
+
+  //880px
+  @media (max-width: 55em) {
+    margin-left: 2.5rem;
+  }
+
+
+  //544px
+  @media (max-width: 34em) {
+    padding: 0;
+    margin: 16px 0 16px 0;
+  }
+
+
+  //400px
+  @media (max-width: 25em) {
+    flex-direction: column;
+  }
+
+
+  &__item {
+    padding: 1rem;
+    background-color: $color-dark-green;
+    border-radius: 100px;
+    //1040px
+    @media (max-width: 65em) {
+      padding: 0.5rem;
+    }
+
+    //544px
+    @media (max-width: 34em) {
+      padding: 0.2rem;
+      font-size: 14px;
+    }
+  }
+}
+

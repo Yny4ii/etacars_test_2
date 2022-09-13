@@ -39,9 +39,12 @@ ul, ol, li {
 @import 'styles/column';
 @import 'stories/button/delete-button';
 @import 'stories/button/back-button';
+@import 'stories/list/topCurrency';
+@import 'stories/table/currencyTable';
+@import 'stories/wallet/wallet';
 @import 'stories/pieChart/pieChart';
 @import 'components/header/header';
-@import 'pages/main/currensyTable';
+@import 'pages/main/main';
 @import 'components/modal/modal';
 @import 'components/walletModal/walletModal';
 @import 'stories/loader/loader';

@@ -20,7 +20,7 @@ describe("Details page tests", () => {
     cy.get(".add-button").first().click();
     cy.get(".modal").should("be.visible");
     cy.get(".modal__input").type("1").should("have.value", "1");
-    cy.get(".modal__input-field > .add-button").click();
+    cy.get(".modal__input-field > form > .add-button").click();
     cy.percySnapshot();
   });
 

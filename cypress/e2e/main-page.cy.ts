@@ -6,7 +6,7 @@ describe("Main page tests", () => {
     cy.get(".add-button").first().click();
     cy.get(".modal").should("be.visible");
     cy.get(".modal__input").type("1asd").should("have.value", "1asd");
-    cy.get(".modal__input-field > .add-button").click();
+    cy.get(".modal__input-field > form >.add-button").click();
     cy.get(".modal__warning-message");
     cy.percySnapshot();
   });
@@ -16,7 +16,7 @@ describe("Main page tests", () => {
     cy.get(".add-button").first().click();
     cy.get(".modal").should("be.visible");
     cy.get(".modal__input").type("1").should("have.value", "1");
-    cy.get(".modal__input-field > .add-button").click();
+    cy.get(".modal__input-field > form >  .add-button").click();
     cy.percySnapshot();
   });
 
@@ -31,8 +31,8 @@ describe("Main page tests", () => {
     cy.get(".add-button").first().click();
     cy.get(".modal").should("be.visible");
     cy.get(".modal__input").type("1").should("have.value", "1");
-    cy.get(".modal__input-field > .add-button").click();
-    cy.get(".header__wallet").click();
+    cy.get(".modal__input-field > form > .add-button").click();
+    cy.get(".wallet").click();
     cy.get(".modal").should("be.visible");
     cy.get(".delete-button").click();
     cy.percySnapshot();
