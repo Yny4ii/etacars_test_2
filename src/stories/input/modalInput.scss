@@ -1,0 +1,9 @@
+.modal-input {
+  padding: 0.5rem 2rem;
+  border: 2px solid $color-dark-green;
+  border-radius: 1.5rem;
+
+  &:focus {
+    outline: $color-dark-green;
+  }
+}
