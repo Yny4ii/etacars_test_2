@@ -6,6 +6,7 @@ export interface WalletProps {
   currentPrice: number;
   walletDifference: number;
   walletDifferencePercent: number;
+  children?: string;
 }
 
 export const Wallet = ({
@@ -13,9 +14,11 @@ export const Wallet = ({
   walletDifferencePercent,
   walletDifference,
   currentPrice,
+  children,
 }: WalletProps) => {
   return (
     <div className="wallet" onClick={() => setModalActive(true)}>
+      {children}
       <div className="wallet__info">
         <div>${floatFormat(currentPrice)}</div>
         <div>

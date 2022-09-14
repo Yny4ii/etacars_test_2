@@ -3,11 +3,9 @@ import { Loader } from "../stories/loader/loader";
 
 describe("Loader component", () => {
   it("Loader render", () => {
-    render(<Loader />);
-    const loader = screen.getByText(
-      (content, element) => element.tagName.toLowerCase() === "span"
-    );
+    render(<Loader children={"loader"} />);
+    const loader = screen.getByText("loader");
     expect(loader).toBeInTheDocument();
-    expect(loader).toHaveClass("loader");
+    expect(loader).toHaveClass("box");
   });
 });

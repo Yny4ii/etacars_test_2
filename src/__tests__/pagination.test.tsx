@@ -3,16 +3,7 @@ import { Pagination } from "../stories/pagination/Pagination";
 
 describe("Pagination component", () => {
   it("Pagination render", () => {
-    const currenciesPerPage = 10;
-    const totalCurrency = 100;
-
-    render(
-      <Pagination
-        paginate={() => null}
-        currenciesPerPage={currenciesPerPage}
-        totalCurrency={totalCurrency}
-      />
-    );
+    render(<Pagination limit={10} currentPage={1} pagination={() => {}} />);
     expect(screen.getByRole("list")).toHaveClass("pagination");
   });
 });

@@ -1,8 +1,13 @@
 import React from "react";
 
-export const Loader = () => {
+interface LoaderProps {
+  children?: string;
+}
+
+export const Loader = ({ children }: LoaderProps) => {
   return (
     <div className="box">
+      {children}
       <span className="loader"></span>
     </div>
   );
