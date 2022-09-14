@@ -3,6 +3,7 @@ import { Currency } from "../../interfaces/Currency";
 import { useAppDispatch } from "../../hooks/hooks";
 import { addCurrencyToWallet } from "../../redux/slices/walletSlice";
 import { checkInput } from "../../helpers/checkInput";
+import { ModalForm } from "../../stories/form/modalForm";
 
 interface ModalProps {
   setActive: (option: boolean) => void;
@@ -44,20 +45,11 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
     <div className="modal" onClick={() => setActive(false)}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <p>Enter the value and click add</p>
-        <div className="modal__input-field">
-          <form onSubmit={(e) => onAddButton(e)}>
-            <input
-              onChange={(e) => onChangeInput(e)}
-              value={input}
-              autoFocus={true}
-              className="modal__input"
-              placeholder="Enter the value..."
-            />
-            <button className="add-button" onClick={(e) => onAddButton(e)}>
-              Add
-            </button>
-          </form>
-        </div>
+        <ModalForm
+          onAddButton={onAddButton}
+          onChangeInput={onChangeInput}
+          input={input}
+        />
         {warningActive && (
           <div className="modal__warning-message">
             Invalid value <br />
