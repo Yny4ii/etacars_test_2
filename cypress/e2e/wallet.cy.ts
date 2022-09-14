@@ -5,8 +5,8 @@ describe("Wallet  tests", () => {
     cy.visit("http://localhost:3000");
     cy.get(".add-button").first().click();
     cy.get(".modal").should("be.visible");
-    cy.get(".modal__input").type("1.23").should("have.value", "1.23");
-    cy.get(".modal__input-field > form > .add-button").click();
+    cy.get(".modal-input").type("1.23").should("have.value", "1.23");
+    cy.get(".modal-form > .add-button").click();
     cy.get(".wallet").click();
     cy.contains("1.23");
     cy.reload();
@@ -19,8 +19,8 @@ describe("Wallet  tests", () => {
     cy.visit("http://localhost:3000");
     cy.get(".add-button").first().click();
     cy.get(".modal").should("be.visible");
-    cy.get(".modal__input").type("1.23").should("have.value", "1.23");
-    cy.get(".modal__input-field > form >.add-button").click();
+    cy.get(".modal-input").type("1.23").should("have.value", "1.23");
+    cy.get(".modal-form >.add-button").click();
     cy.get(".wallet").click();
     cy.contains("1.23");
     cy.get(".delete-button").click();
