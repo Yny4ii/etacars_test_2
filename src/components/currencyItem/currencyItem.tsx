@@ -58,7 +58,7 @@ export const CurrencyItem = ({
   };
 
   return (
-    <tr className="table__row" onClick={onNavigate && onNavigate(id)}>
+    <tr className="table__row" onClick={onNavigate && onNavigate(id)} data-cy={"tbody-table-row"}>
       <td className="table__item">{rank}</td>
       <td className="table__item">{name}</td>
       <td className="table__item">${floatFormat(priceUsd)}</td>
@@ -72,6 +72,7 @@ export const CurrencyItem = ({
           variant={"add-button"}
           onClick={onClickPlusButton}
           label={"+"}
+          dataCy={"currency-add-button"}
         />
       </td>
     </tr>

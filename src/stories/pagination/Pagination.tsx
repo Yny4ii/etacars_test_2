@@ -16,12 +16,13 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
   return (
-    <ul className="pagination">
+    <ul className="pagination" data-cy={"pagination"}>
       {pageNumbers.map((e) => (
         <li
           onClick={() => pagination(e)}
           key={e}
           className={`page-item ${e === currentPage ? `selected` : ``}`}
+          data-cy={"page-item"}
         >
           <a href="#" className="page-link">
             {e}

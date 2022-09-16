@@ -28,6 +28,7 @@ export const ModalForm = ({
         variant={"add-button"}
         onClick={onAddButton}
         label={"Add"}
+        dataCy={"modal-form-add-button"}
       ></Button>
     </form>
   );

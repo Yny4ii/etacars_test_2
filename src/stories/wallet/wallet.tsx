@@ -17,7 +17,7 @@ export const Wallet = ({
   children,
 }: WalletProps) => {
   return (
-    <div className="wallet" onClick={() => setModalActive(true)}>
+    <div className="wallet" onClick={() => setModalActive(true)} data-cy={"wallet"}>
       {children}
       <div className="wallet__info">
         <div>${floatFormat(currentPrice)}</div>

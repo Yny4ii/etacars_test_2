@@ -17,7 +17,7 @@ export const WalletModal = ({
 }: WalletModalProps) => {
   const dispatch = useAppDispatch();
   return (
-    <div className="modal" onClick={() => setActive(false)}>
+    <div className="modal" onClick={() => setActive(false)} data-cy={"modal"}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <p>Your wallet</p>
         <ul className="wallet-list">
@@ -30,6 +30,7 @@ export const WalletModal = ({
                 variant={"delete-button"}
                 onClick={() => dispatch(deleteCurrencyFromWallet(e.id))}
                 label={"delete"}
+                dataCy={"wallet-delete-button"}
               />
             </li>
           ))}

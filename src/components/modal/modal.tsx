@@ -42,7 +42,7 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
   };
 
   return (
-    <div className="modal" onClick={() => setActive(false)}>
+    <div className="modal" onClick={() => setActive(false)} data-cy={"modal"}>
       <div className="modal__content" onClick={(e) => e.stopPropagation()}>
         <p>Enter the value and click add</p>
         <ModalForm
@@ -51,7 +51,7 @@ const Modal = ({ setActive, selectedCurrency }: ModalProps) => {
           input={input}
         />
         {warningActive && (
-          <div className="modal__warning-message">
+          <div className="modal__warning-message" data-cy={"modal__warning-message"}>
             Invalid value <br />
             (min - 0.00001, max - 100000000)
           </div>

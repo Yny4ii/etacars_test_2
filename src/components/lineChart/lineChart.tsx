@@ -56,7 +56,7 @@ export const LineChart = ({ history }: LineChartProps) => {
   };
 
   return (
-    <div style={{ width: "100%", height: "300px" }}>
+    <div style={{ width: "100%", height: "300px" }} data-cy={"canvas"}>
       <Line data={data} options={options} />
     </div>
   );

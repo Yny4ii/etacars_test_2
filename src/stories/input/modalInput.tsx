@@ -20,6 +20,7 @@ export const ModalInput = ({
       autoFocus={autoFocus}
       className="modal-input"
       placeholder={placeholder}
+      data-cy={"input"}
     />
   );
 };
